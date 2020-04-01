@@ -20,6 +20,8 @@ services:
 
   php:
     build: ./php
+    ports:
+      - "9501:9501"
     volumes:
       - ./nginx/www:/var/www/html
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
@@ -30,20 +32,6 @@ services:
       - backend  
     restart: always
     container_name: php
-
-  mysql:
-    build: ./mysql
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/my.cnf
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-    networks:
-      - backend
-    restart: always
-    container_name: mysql
 
   redis:
     build: ./redis
